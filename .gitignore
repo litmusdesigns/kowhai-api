@@ -1,0 +1,98 @@
+# Ignore venv and virtual environment files
+venv/
+env/
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore development and environment-specific files
+*.env
+*.env.*
+*.vscode/
+*.idea/
+*.DS_Store
+*.pydevproject
+*.project
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.out
+*.swo
+*.bak
+*.pyc
+*.py~*
+
+# Ignore pip and package-related files
+pip-log.txt
+*.egg-info/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore log files
+*.log
+
+# Ignore build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore database files
+*.db
+*.sqlite3
+
+# Ignore cache and temporary files
+.cache/
+.temp/
+temp/
+.tmp/
+__pycache__/
+*.swp
+
+# Ignore any sensitive or private information
+secret.ini
+credentials.json
+
+# Ignore generated or user-specific files
+*.pyc
+*.pyo
+*.orig
+*.rej
+*~*
+*.swp
+*.tmp
+*.log
+*.bak
+*.vscode/
+*.idea/
+*.pytest_cache/
+
+# Exclude specific files or directories within venv (optional)
+# /venv/Include/
+# /venv/Lib/
+# /venv/Scripts/
+# /venv/pyvenv.cfg
+
+# Exclude specific files or directories within env (optional)
+# /env/Include/
+# /env/Lib/
+# /env/Scripts/
+# /env/pyvenv.cfg
+
+# Add any project-specific files or directories to ignore below
+
+# For Django projects, you may want to ignore the following:
+# *.sqlite3
+# *.pyc
+# /static/
+# /media/
+
+# For Flask projects, you may want to ignore the following:
+*.sqlite3
+*.pyc
+
+# For Jupyter Notebooks, you may want to ignore the following:
+# *.ipynb_checkpoints/
+# .ipynb_checkpoints/
