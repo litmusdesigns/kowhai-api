@@ -1,80 +1,62 @@
 from flask import Flask, request, jsonify
-import random
+import random, json
 
 app = Flask(__name__)
 
-# Dictionary of colors and their translations in Maori
-subjects = {
-    "colors": {
-        "red": "whero",
-        "blue": "kikorangi",
-        "green": "kakariki",
-        "yellow": "kowhai",
-        "black": "mangu",
-        "white": "ma",
-    },
-    "numbers": {
-        "1": "tahi",
-        "2": "rua",
-        "3": "toru",
-        "4": "wha",
-        "5": "rima",
-        "6": "ono",
-        "7": "whitu",
-        "8": "waru",
-        "9": "iwa",
-        "10": "tekau",
-    },
-}
-
+#  Dictionary of colors and their translations in Maori
+with open('./includes/subjects.json') as f:
+    subjects = json.load(f)
 
 class Translator:
-    def get_random_subject(self, subject):
-        # Select a random subject from the subjects dictionary
+    def get_random_subject(self, subject, answer_lang, question_lang):
         subject_dict = subjects.get(subject)
         if subject_dict is None:
             return None
 
-        random_subject = random.choice(list(subject_dict.keys()))
-        answer_translation = random_subject
-        question_translation = subject_dict[random_subject]
+        question_dict = subject_dict.get(question_lang)
+        answer_dict = subject_dict.get(answer_lang)
+        if question_dict is None or answer_dict is None:
+            return None
 
-        # Generate three distractors by randomly selecting subjects other than the correct one
-        distractors = random.sample([s for s in subject_dict.keys() if s != random_subject], 3)
+        random_subject = random.choice(list(question_dict.keys()))
+        answer_translation = answer_dict[random_subject]
+        question_translation = question_dict[random_subject]
 
-        # Combine the correct answer and distractors to form multiple-choice options
-        options = [answer_translation] + [d for d in distractors]
+        # Get 3 random distractors
+        distractors = random.sample([s for s in answer_dict.values() if s != answer_translation], 3)
 
-        # Shuffle the options to randomize the order
+        options = [answer_translation] + distractors
         random.shuffle(options)
 
         return answer_translation, question_translation, options
 
 
 @app.route('/api/get_question', methods=['GET'])
-def get_random_subject():
+def get_question():
     subject = request.args.get('subject')
-    a_lang = request.args.get('answer_lang')
-    q_lang = request.args.get('question_lang')
+    answer_lang = request.args.get('answer_lang')
+    question_lang = request.args.get('question_lang')
 
-    # Check if the subject is valid and languages are 'en' and 'maori'
-    if subject in subjects and a_lang == 'en' and q_lang == 'mi':
+    subject_dict = subjects.get(subject)
+    if subject_dict and subject_dict.get(answer_lang) and subject_dict.get(question_lang):
         translator = Translator()
-        answer_translation, question_translation, options = translator.get_random_subject(subject)
+        answer_translation, question_translation, options = translator.get_random_subject(subject, answer_lang, question_lang)
 
         if not answer_translation:
             return jsonify({"error": "Invalid subject"}), 400
 
-        # Prepare the response with the question, options, and correct answer
-        response = {
+        body = {
             "question": question_translation,
             "options": options,
             "answer": answer_translation,
         }
+        response = jsonify(body)
+        response.headers['Content-Type'] = 'application/json'
 
-        return jsonify(response)
+        return response
 
     return jsonify({"error": "Invalid parameters"}), 400
+
 
 
 if __name__ == '__main__':

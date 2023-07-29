@@ -1,0 +1,54 @@
+{
+	"colors": {
+		"en": {
+			"1": "red",
+			"2": "blue",
+			"3": "green",
+			"4": "yellow",
+			"5": "black",
+			"6": "white",
+			"7": "brown",
+			"8": "orange",
+			"9": "purple",
+			"10": "pink"
+		},
+		"mi": {
+			"1": "whero",
+			"2": "kikorangi",
+			"3": "kakariki",
+			"4": "kowhai",
+			"5": "mangu",
+			"6": "ma",
+			"7": "parauri",
+			"8": "karaka",
+			"9": "waiporoporo",
+			"10": "mawhero"
+		}
+	},
+	"numbers": {
+		"en": {
+			"1": "one",
+			"2": "two",
+			"3": "three",
+			"4": "four",
+			"5": "five",
+			"6": "six",
+			"7": "seven",
+			"8": "eight",
+			"9": "nine",
+			"10": "ten"
+		},
+		"mi": {
+			"1": "tahi",
+			"2": "rua",
+			"3": "toru",
+			"4": "wha",
+			"5": "rima",
+			"6": "ono",
+			"7": "whitu",
+			"8": "waru",
+			"9": "iwa",
+			"10": "tekau"
+		}
+	}
+}
