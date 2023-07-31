@@ -52,6 +52,7 @@ def get_question():
         }
         response = jsonify(body)
         response.headers['Content-Type'] = 'application/json'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 
         return response
 

@@ -7,6 +7,7 @@
 - add additional validation and sanitation to input parameters
 - get unlimited languages data from open ai
 - add caching to reduce open ai data usage
+- add release notes
 
 # Done
 ## v0.0.1 *TBD*
